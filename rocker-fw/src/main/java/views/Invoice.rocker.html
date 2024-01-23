@@ -1,0 +1,53 @@
+@option discardLogicWhitespace=true
+@import java.util.*
+@import java.lang.Math.*
+@import com.rocker.RockerApplication.*
+@import java.math.BigDecimal
+@import views.*
+
+@args (List<Item> items, BigDecimal subtotal, BigDecimal grandTotal)
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VF INVOICE</title>
+        <link rel="stylesheet" href="src/main/java/views/style.css" type="text/css" media="all" />
+    </head>
+    <body>
+        <header>
+            <h1><u>VF INVOICE</u></h1>
+        </header>
+        <section>
+            <table>
+                <thead>
+                <tr>
+                    <th>CallType</th>
+                    <th>Duration</th>
+                    <th>Cost</th>
+                    <th>Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @for (Item item : items) {
+                    <tr>
+                        <td>@item.getCallType()</td>
+                        <td>@item.getDuration()</td>
+                        <td>@item.getCost()</td>
+                        <td>@item.getTotal()</td>
+                    </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr class="total">
+                        <td colspan="3">Subtotal</td>
+                        <td>$@subtotal</td>
+                    </tr>
+                    <tr class="total">
+                        <td colspan="3">Grand Total</td>
+                        <td>$@grandTotal</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+    </body>
+</html>

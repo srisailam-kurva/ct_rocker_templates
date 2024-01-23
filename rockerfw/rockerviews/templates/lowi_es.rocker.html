@@ -1,0 +1,229 @@
+@import com.rocker.model.CreditNote
+@import com.rocker.model.Customer
+@import java.util.*
+@import com.rocker.service.RockerService.*
+
+@args (CreditNote creditNote, Map<String ,Object> contentMap,Map<String ,String> properties )
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lowi Credit Note</title>
+        <link rel="stylesheet" type="text/css" media="all" href="rockerviews/templates/lowi_style.css"/>
+    </head>
+    <body>
+        <div class="rotate p5 ft4">
+            <p>@properties.get("creditNote.side.text")</p>
+        </div>
+        <div class="header" style="margin-top: -50px;">
+            <div id="page">
+                <table>
+                    <tr>
+                        <td>
+                            <div id="logodiv">
+                                <img id="logoimage" src="rockerviews/templates/JOiNew.png"/>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div id="id1_2">
+                    <div id="creditNote" style="margin-left: -3px;">
+                        <table>
+                            <tr>
+                                <td>
+                                    <table>
+                                        <td valign="top">
+                                            <tr>
+                                                <td class="tr2 td0">
+                                                    <P class="p1 ft2">@properties.get("creditNote.referenceNumber")</P>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tr2 td0">
+                                                    <P class="p1 ft2">@properties.get("creditNote.customer.externalAccountID")</P>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tr2 td0">
+                                                    <P class="p1 ft2">@properties.get("creditNote.customer.firstName")</P>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tr2 td0">
+                                                    <P class="p1 ft2"> @properties.get("creditNote.customer.idNumber")</P>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tr2 td0">
+                                                    <P class="p1 ft2">@properties.get("creditNote.issueDate")</P>
+                                                </td>
+                                            </tr>
+                                        </td>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table>
+                                        <td valign="top">
+                                            <tr>
+                                                <td class="tr2 td0">
+                                                    <P class="p2 ft2">@creditNote.getReferenceNumber()</P>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tr2 td0">
+                                                    <P class="p2 ft2">@creditNote.getCustomer().getExternalAccountID()</P>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tr2 td0">
+                                                    <P class="p2 ft2">@creditNote.getCustomer().getFirstName() @creditNote.getCustomer().getLastName() @creditNote.getCustomer().getLastName2()</P>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tr2 td0">
+                                                    <P class="p2 ft2">@creditNote.getCustomer().getIdNumber()</P>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tr2 td0">
+                                                    <P class="p2 ft2">@creditNote.getIssueDate()</P>
+                                                </td>
+                                            </tr>
+                                        </td>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <table>
+                            <td valign="top">
+                                <tr>
+                                    <td class="tr2 td1">
+                                        <P class="p2 ft2">@creditNote.getCustomer().getFirstName() @creditNote.getCustomer().getLastName()  @creditNote.getCustomer().getLastName2()</P>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tr2 td1">
+                                        <P class="p2 ft2">@creditNote.getCustomer().getAddress()</P>
+                                        <P class="p2 ft2">@creditNote.getCustomer().getAddress()</P>
+                                    </td>
+                                </tr>
+                                <div>
+                                    @if(creditNote.getCustomer().getDoorInfo() !=null){
+                                    <tr>
+                                        <td class="tr2 td1">
+                                            <P class="p2 ft2">@creditNote.getCustomer().getDoorInfo()</P>
+                                        </td>
+                                    </tr>
+                                    }
+                                </div>
+                                <tr>
+                                    <td class="tr2 td1">
+                                        <P class="p2 ft2">@creditNote.getCustomer().getZipCode() @creditNote.getCustomer().getCity()</P>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tr2 td1">
+                                        <P class="p2 ft2">@creditNote.getCustomer().getState()</P>
+                                    </td>
+                                </tr>
+                            </td>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="middle">
+            <div class="creditNote">
+                <table>
+                    <tr>
+                        <td class="tr2 td0">
+                            <P class="p1 ft2">@properties.get("creditNote.invoices")</P>
+                        </td>
+                    </tr>
+                </table>
+                <div class="invoice">
+                    <table>
+                        @for(invoice:creditNote.getInvoices()) {
+                        <tr>
+                            <td class="tr2 td0">
+                                <P class="p1 ft3">@invoice.getInvoiceNumber() @properties.get("creditNote.invoice.ofThe") @invoice.getInvoiceDate()</P>
+                            </td>
+                        </tr>
+                        }
+                    </table>
+                </div>
+                <table>
+                    <tr>
+                        <td class="tr2 td0 bgtd">
+                            <P class="p1 ft2">@properties.get("creditNote.invoice.concept")</P>
+                        </td>
+                        <td class="tr2 td0 bgtd">
+                            <P class="p1 ft3">&nbsp;</P>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tr2 td0">
+                            <P class="p1 ft3">@properties.get("creditNote.dues")</P>
+                        </td>
+                        <td class="tr2 td0">
+                            <P class="p4 ft3">@if(creditNote.getDues() > 0) {-@creditNote.getDues() } else {@creditNote.getDues() }</P>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tr2 td0">
+                            <P class="p1 ft3">@properties.get("creditNote.consumptions")</P>
+                        </td>
+                        <td class="tr2 td0">
+                            <P class="p4 ft3">@if(creditNote.getConsumptions() > 0) {-@creditNote.getConsumptions() } else {@creditNote.getConsumptions() }</P>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tr2 td0 brbt2">
+                            <P class="p1 ft3">@properties.get("creditNote.others")</P>
+                        </td>
+                        <td class="tr2 td0 brbt2">
+                            <P class="p4 ft3">@if(creditNote.getOthers() > 0) {-@creditNote.getOthers() } else {@creditNote.getOthers() }</P>
+                        </td>
+                    </tr>
+<!--                    <tr>-->
+<!--                        <td class="tr2 td0"><P class="p1 ft5">&nbsp;</P></td>-->
+<!--                    </tr>-->
+                    <tr>
+                        <td class="tr2 td0">
+                            <P class="p3 ft6">@properties.get("creditNote.netAmount") @creditNote.getTax()%</P>
+                        </td>
+                        <td class="tr2 td0">
+                            <P class="p4 ft6">@if(creditNote.getNetAmount() > 0) {-@creditNote.getNetAmount() @properties.get("creditNote.currency") } else { @creditNote.getNetAmount() @properties.get("creditNote.currency") }</P>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tr2 td0">
+                            <P class="p3 ft2">@creditNote.getTaxDescription() @creditNote.getTax()%</P>
+                        </td>
+                        <td class="tr2 td0">
+                            <P class="p4 ft2">@if(creditNote.getTaxAmount() > 0) {-@creditNote.getTaxAmount() @properties.get("creditNote.currency") } else { @creditNote.getTaxAmount() @properties.get("creditNote.currency") }</P>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tr2 td0">
+                            <P class="p3 ft2">@properties.get("creditNote.totalAmount")</P>
+                        </td>
+                        <td class="tr2 td0">
+                            <P class="p4 ft2">@if(creditNote.getTotalAmount() > 0) {-@creditNote.getTotalAmount() @properties.get("creditNote.currency") } else { @creditNote.getTotalAmount() @properties.get("creditNote.currency") }</P>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="text">
+                <div style="margin-top: 50px;">
+                    <span class="p6 ft2">@properties.get("creditNote.method.header")</span>
+                    <span class="p6 ft3">@properties.get("creditNote.method.text")</span>
+                </div>
+                <div style="margin-top: 50px;">
+                    <span class="p6 ft2">@properties.get("creditNote.reason.header")</span>
+                    <span class="p6 ft3">@properties.get("creditNote.reason.text")</span>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
