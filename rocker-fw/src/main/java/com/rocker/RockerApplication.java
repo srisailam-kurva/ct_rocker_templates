@@ -18,7 +18,7 @@ public class RockerApplication {
 
     public static void main(String[] args) {
         List<Item> items = Arrays.asList(
-                new Item("directcall", 3, new BigDecimal("5.00")),
+                new Item("direct call", 3, new BigDecimal("5.00")),
                 new Item("forwarded call", 2, new BigDecimal("8.00")),
                 new Item("incoming call", 1, new BigDecimal("12.00"))
         );

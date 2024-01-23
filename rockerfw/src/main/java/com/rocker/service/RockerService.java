@@ -86,21 +86,21 @@ public class RockerService {
         log.info("completed");
 //        log.info(template);
 
-//        String outputFile = "C:\\JAVA\\vff.pdf";
-//        try (FileOutputStream os = new FileOutputStream(outputFile)) {
-//            ITextRenderer renderer = new ITextRenderer();
-////            renderer.getSharedContext().setBaseURL("file:///C:/Users/Srisailam/Downloads/rocker/src/main/java/views");
-//            renderer.getSharedContext().setUserAgentCallback(new MyUserAgent(renderer.getOutputDevice()));
-//
-//            renderer.setDocumentFromString(template);
-//            renderer.layout();
-//            renderer.createPDF(os, true);
-//            renderer.finishPDF();
-//            log.info("done");
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        String outputFile = "C:\\JAVA\\vff.pdf";
+        try (FileOutputStream os = new FileOutputStream(outputFile)) {
+            ITextRenderer renderer = new ITextRenderer();
+//            renderer.getSharedContext().setBaseURL("file:///C:/Users/Srisailam/Downloads/rocker/src/main/java/views");
+            renderer.getSharedContext().setUserAgentCallback(new MyUserAgent(renderer.getOutputDevice()));
+
+            renderer.setDocumentFromString(template);
+            renderer.layout();
+            renderer.createPDF(os, true);
+            renderer.finishPDF();
+            log.info("done");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "done";
     }
 
