@@ -79,9 +79,11 @@ public class RockerService {
         }
 
 //        RockerRuntime.getInstance().setReloading(true);
-        String template = templates.lowi_es.template(creditNote, contentMap, propertiesValues)
-                .render()
-                .toString();
+//        String template = templates.lowi_es.template(creditNote, contentMap, propertiesValues)
+//                .render()
+//                .toString();
+        String temp=templates.inv.template(creditNote, contentMap, propertiesValues)
+                        .render().toString();
 
         log.info("completed");
 //        log.info(template);
@@ -92,7 +94,7 @@ public class RockerService {
 //            renderer.getSharedContext().setBaseURL("file:///C:/Users/Srisailam/Downloads/rocker/src/main/java/views");
             renderer.getSharedContext().setUserAgentCallback(new MyUserAgent(renderer.getOutputDevice()));
 
-            renderer.setDocumentFromString(template);
+            renderer.setDocumentFromString(temp);
             renderer.layout();
             renderer.createPDF(os, true);
             renderer.finishPDF();
