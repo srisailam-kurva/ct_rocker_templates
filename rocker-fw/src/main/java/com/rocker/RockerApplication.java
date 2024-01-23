@@ -44,7 +44,7 @@ public class RockerApplication {
             renderer.layout();
             renderer.createPDF(os, true);
             renderer.finishPDF();
-            log.info("done");
+            log.info("completed");
         } catch (Exception e) {
             e.printStackTrace();
         }
